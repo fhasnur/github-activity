@@ -8,7 +8,7 @@ To use the GitHub Activity CLI, you need to have Go installed on your machine.
 
 1. **Clone the Repository:**
 ```bash
-git clone https://github.com/yourusername/github-activity.git
+git clone https://github.com/fhasnur/github-activity.git
 ```
 
 2. **Navigate to the project directory:**
