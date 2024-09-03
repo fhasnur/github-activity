@@ -15,12 +15,16 @@ func main() {
 		Args:  cobra.ExactArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
 			username := args[0]
-			activity.FetchGithubActivity(username)
+			err := activity.FetchGithubActivity(username)
+			if err != nil {
+				fmt.Println("Error:", err)
+				os.Exit(1)
+			}
 		},
 	}
 
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
+		fmt.Println("Error executing command:", err)
 		os.Exit(1)
 	}
 }

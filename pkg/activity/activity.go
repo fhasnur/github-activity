@@ -2,6 +2,7 @@ package activity
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 )
@@ -30,19 +31,29 @@ type GithubEvent struct {
 	Payload Payload `json:"payload"`
 }
 
-func FetchGithubActivity(username string) {
+func FetchGithubActivity(username string) error {
 	url := fmt.Sprintf("https://api.github.com/users/%s/events", username)
 	resp, err := http.Get(url)
 	if err != nil {
-		fmt.Println("Error fetching data", err)
-		return
+		return fmt.Errorf("failed to fetch data: %w", err)
 	}
 	defer resp.Body.Close()
 
+	if resp.StatusCode != http.StatusOK {
+		if resp.StatusCode == http.StatusNotFound {
+			return errors.New("user not found, please check the username")
+		}
+		return fmt.Errorf("failed to fetch data, status code: %d", resp.StatusCode)
+	}
+
 	var events []GithubEvent
 	if err := json.NewDecoder(resp.Body).Decode(&events); err != nil {
-		fmt.Println("Error decoding JSON", err)
-		return
+		return fmt.Errorf("error decoding JSON: %w", err)
+	}
+
+	if len(events) == 0 {
+		fmt.Println("No recent activity found for this user")
+		return nil
 	}
 
 	for _, event := range events {
@@ -64,4 +75,6 @@ func FetchGithubActivity(username string) {
 		}
 		fmt.Println("- ", action)
 	}
+
+	return nil
 }
