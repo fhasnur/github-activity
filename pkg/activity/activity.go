@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/fatih/color"
 )
@@ -28,12 +29,19 @@ type Payload struct {
 }
 
 type GithubEvent struct {
-	Type    string  `json:"type"`
-	Repo    Repo    `json:"repo"`
-	Payload Payload `json:"payload"`
+	Type      string    `json:"type"`
+	Repo      Repo      `json:"repo"`
+	Payload   Payload   `json:"payload"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 func FetchGithubActivity(username string) error {
+	user, err := FetchUserDetails(username)
+	if err != nil {
+		return err
+	}
+	DisplayUserDetails(user)
+
 	url := fmt.Sprintf("https://api.github.com/users/%s/events", username)
 	resp, err := http.Get(url)
 	if err != nil {
@@ -76,7 +84,8 @@ func FetchGithubActivity(username string) error {
 		default:
 			action = fmt.Sprintf("%s in %s", event.Type, event.Repo.Name)
 		}
-		color.Green("- %s", action)
+		color.Green("- %s (at %s)", action, event.CreatedAt.Format(time.RFC3339))
+		fmt.Println("-------------------------------------------------")
 	}
 
 	return nil
