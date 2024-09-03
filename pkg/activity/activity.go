@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+
+	"github.com/fatih/color"
 )
 
 type Repo struct {
@@ -56,6 +58,7 @@ func FetchGithubActivity(username string) error {
 		return nil
 	}
 
+	color.Cyan("\nRecent Activities:")
 	for _, event := range events {
 		var action string
 		switch event.Type {
@@ -73,7 +76,7 @@ func FetchGithubActivity(username string) error {
 		default:
 			action = fmt.Sprintf("%s in %s", event.Type, event.Repo.Name)
 		}
-		fmt.Println("- ", action)
+		color.Green("- %s", action)
 	}
 
 	return nil
