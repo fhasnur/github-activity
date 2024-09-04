@@ -37,7 +37,19 @@ Replace <username> with the GitHub username you want to query. For example:
 ### Example Output
 
 ```bash
--  Created branch in fhasnur/github-activity
--  Created repository in fhasnur/github-activity
--  Pushed 1 commit(s) to fhasnur/fhasnur
+Github User: fhasnur
+Name: Fandi Hasnur
+Bio: my codes are funday space 🌞
+Public Repos: 52 | Followers: 46
+
+Recent Activities:
+-------------------------------------------------
+- Pushed 1 commit(s) to fhasnur/github-activity
+ (at 2024-09-03T16:52:59Z)
+ -------------------------------------------------
+- Created branch in fhasnur/github-activity 
+ (at 2024-08-24T01:15:41Z)
+-------------------------------------------------
+- Created repository in fhasnur/github-activity 
+ (at 2024-08-24T01:09:37Z)
 ```
