@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github-activity/pkg/activity"
 	"os"
+
+	"github.com/fhasnur/github-activity/pkg/activity"
 
 	"github.com/spf13/cobra"
 )
