@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/fhasnur/github-activity/pkg/activity"
+	"github.com/fhasnur/github-activity/internal/activity"
 
 	"github.com/spf13/cobra"
 )
