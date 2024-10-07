@@ -53,3 +53,11 @@ Recent Activities:
 - Created repository in fhasnur/github-activity 
  (at 2024-08-24T01:09:37Z)
 ```
+
+## Contributing
+
+Feel free to submit pull requests or open issues for new features, improvements, or bug fixes.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
